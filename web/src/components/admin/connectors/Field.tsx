@@ -396,17 +396,30 @@ export const BooleanFormField = ({
   alignTop,
   checked,
 }: BooleanFormFieldProps) => {
+  const { setFieldValue } = useFormikContext();
+  const [field] = useField(name);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (onChange) {
+      onChange(e);
+    } else {
+      console.log("setting the value");
+      console.log(name);
+      setFieldValue(name, e.target.checked);
+    }
+  };
+
   return (
     <div>
       <label className="flex text-sm">
         <Field
           disabled={disabled}
           name={name}
-          checked={checked}
+          checked={checked !== undefined ? checked : field.value}
           type="checkbox"
           className={`${removeIndent ? "mr-2" : "mx-3"}     
             px-5 w-3.5 h-3.5 ${alignTop ? "mt-1" : "my-auto"}`}
-          {...(onChange ? { onChange } : {})}
+          onChange={handleChange}
         />
         {!noLabel && (
           <div>

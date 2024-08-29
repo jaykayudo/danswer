@@ -58,15 +58,16 @@ export function LiteLLMModelForm({
         })}
         onSubmit={async (values, formikHelpers) => {
           setShowTentativeModel(values as CloudEmbeddingModel);
+          console.log(values);
         }}
       >
-        {({ isSubmitting, setFieldValue }) => (
+        {({ isSubmitting }) => (
           <Form>
             <TextFormField
               name="api_url"
               label="API Base URL:"
               subtext="The base URL for your hosted embedding model"
-              placeholder="E.g. 'https://1.445.23.12422'"
+              placeholder="e.g. 'http://localhost:4000/embeddings'"
               autoCompleteDisabled={true}
             />
 
@@ -74,7 +75,7 @@ export function LiteLLMModelForm({
               name="model_name"
               label="Model Name:"
               subtext="The name of the LiteLLM model"
-              placeholder="E.g. 'gpt-3.5-turbo'"
+              placeholder="e.g. 'gpt-3.5-turbo'"
               autoCompleteDisabled={true}
             />
 
@@ -82,7 +83,7 @@ export function LiteLLMModelForm({
               name="model_dim"
               label="Model Dimension:"
               subtext="The dimension of the model's embeddings"
-              placeholder="E.g. '1536'"
+              placeholder="e.g. '1536'"
               type="number"
               autoCompleteDisabled={true}
             />

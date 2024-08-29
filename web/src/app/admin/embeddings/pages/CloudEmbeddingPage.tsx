@@ -41,7 +41,9 @@ export default function CloudEmbeddingPage({
     React.SetStateAction<CloudEmbeddingProvider | null>
   >;
 }) {
-  const [configureLiteLLM, setConfigureLiteLLM] = useState(false);
+  const [configureLiteLLM, setConfigureLiteLLM] = useState(
+    currentModel.provider_type == EmbeddingProvider.LITELLM
+  );
   function hasProviderTypeinArray(
     arr: Array<{ provider_type: string }>,
     searchName: string
@@ -144,7 +146,6 @@ export default function CloudEmbeddingPage({
             Configure LiteLLM model
           </Button>
         )}
-        {currentModel.provider_type}
 
         {configureLiteLLM && (
           <div className="w-full flex">
