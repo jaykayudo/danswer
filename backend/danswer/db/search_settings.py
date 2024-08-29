@@ -235,6 +235,7 @@ def get_old_default_embedding_model() -> IndexingSetting:
         passage_prefix=(ASYM_PASSAGE_PREFIX if is_overridden else ""),
         index_name="danswer_chunk",
         multipass_indexing=False,
+        api_url=None,
     )
 
 
@@ -247,4 +248,5 @@ def get_new_default_embedding_model() -> IndexingSetting:
         passage_prefix=ASYM_PASSAGE_PREFIX,
         index_name=f"danswer_chunk_{clean_model_name(DOCUMENT_ENCODER_MODEL)}",
         multipass_indexing=False,
+        api_url=None,
     )

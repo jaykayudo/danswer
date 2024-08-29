@@ -1,4 +1,3 @@
-import asyncio
 import json
 from typing import Any
 from typing import Optional
@@ -237,16 +236,25 @@ def get_local_reranking_model(
     return _RERANK_MODEL
 
 
-async def embed_with_litellm_proxy(
+def embed_with_litellm_proxy(
     texts: list[str], api_url: str, model: str
 ) -> list[Embedding]:
-    async with httpx.AsyncClient() as client:
-        response = await client.post(
+    with httpx.Client() as client:
+        response = client.post(
             api_url,
             json={
                 "model": model,
                 "input": texts,
             },
+        )
+        print(
+            {
+                "api_url": api_url,
+                "json": {
+                    "model": model,
+                    "input": texts,
+                },
+            }
         )
         response.raise_for_status()
         result = response.json()
@@ -278,9 +286,8 @@ def embed_text(
     if api_url:
         logger.notice(f"Using LiteLLM proxy for embedding with URL: {api_url}")
         try:
-            return asyncio.run(
-                embed_with_litellm_proxy(texts, api_url, model_name or "")
-            )
+            # loop = asyncio.get_event_loop()
+            return embed_with_litellm_proxy(texts, api_url, model_name or "")
         except Exception as e:
             logger.exception(f"Error during LiteLLM proxy embedding: {str(e)}")
             raise
