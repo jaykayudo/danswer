@@ -56,9 +56,8 @@ export function LiteLLMModelForm({
           maxContext: Yup.number(),
           max_tokens: Yup.number(),
         })}
-        onSubmit={async (values, formikHelpers) => {
+        onSubmit={async (values) => {
           setShowTentativeModel(values as CloudEmbeddingModel);
-          console.log(values);
         }}
       >
         {({ isSubmitting }) => (

@@ -403,8 +403,6 @@ export const BooleanFormField = ({
     if (onChange) {
       onChange(e);
     } else {
-      console.log("setting the value");
-      console.log(name);
       setFieldValue(name, e.target.checked);
     }
   };
