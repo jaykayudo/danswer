@@ -247,15 +247,6 @@ def embed_with_litellm_proxy(
                 "input": texts,
             },
         )
-        print(
-            {
-                "api_url": api_url,
-                "json": {
-                    "model": model,
-                    "input": texts,
-                },
-            }
-        )
         response.raise_for_status()
         result = response.json()
         return [embedding["embedding"] for embedding in result["data"]]
